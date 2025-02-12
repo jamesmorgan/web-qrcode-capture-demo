@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image & QR Code Reader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #video-container, #captured-image {
+            width: 100%;
+            max-width: 640px;
+            margin: 20px 0;
+        }
+        #output {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image & QR Code Reader</h1>
+    
+    <button id="start-camera">Start Camera</button>
+    <button id="capture-image">Capture Image</button>
+    <button id="reset" style="display: none;">Reset</button>
+    
+    <div id="video-container">
+        <video id="video" autoplay playsinline style="display: none;"></video>
+    </div>
+    
+    <canvas id="canvas" style="display: none;"></canvas>
+    <img id="captured-image" style="display: none;">
+    
+    <div id="output">
+        <h3>Image Details:</h3>
+        <div id="image-details"></div>
+        <h3>QR Code Data:</h3>
+        <div id="qr-result"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 

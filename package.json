@@ -1,7 +1,7 @@
 {
   "name": "product-data-web-reader",
   "version": "1.0.0",
-  "description": "",
+  "description": "Image and QR code reader web application",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

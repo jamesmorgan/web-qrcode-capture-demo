@@ -64,4 +64,18 @@ Works on modern browsers that support:
 ## License
 
 MIT License
+
+## Deployment
+
+### GitHub Pages
+1. Fork or clone this repository
+2. Go to your repository settings
+3. Under "GitHub Pages", select the main branch as source
+4. Your site will be published at `https://<username>.github.io/<repository-name>`
+
+### Local Development
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Start local server: `npm start`
+4. Open `http://localhost:3000` in your browser
     

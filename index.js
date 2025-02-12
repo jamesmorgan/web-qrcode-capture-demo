@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.use(express.static('public'));
+app.use(express.static('./'));
 
 app.listen(port, () => {
-    console.log(`App running at http://localhost:${port}`);
+    console.log(`Server running at http://localhost:${port}`);
 }); 
