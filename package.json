@@ -1,5 +1,5 @@
 {
-  "name": "product-data-web-reader",
+  "name": "web-qrcode-capture-demo",
   "version": "1.0.0",
   "description": "Image and QR code reader web application",
   "main": "index.js",
