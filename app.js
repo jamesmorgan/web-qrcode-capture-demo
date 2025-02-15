@@ -10,15 +10,83 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let stream = null;
 
+    // Add after variable declarations at the top
+    async function displayCameraInfo() {
+        const infoDiv = document.createElement('div');
+        infoDiv.id = 'camera-info';
+        infoDiv.style.marginTop = '20px';
+        document.body.appendChild(infoDiv);
+
+        try {
+            // Get supported constraints
+            const supportedConstraints = navigator.mediaDevices.getSupportedConstraints();
+            
+            // Get all media devices
+            const devices = await navigator.mediaDevices.enumerateDevices();
+            const videoDevices = devices.filter(device => device.kind === 'videoinput');
+            
+            // If we have an active stream, get its tracks info
+            let trackInfo = 'No active stream';
+            if (stream) {
+                const videoTrack = stream.getVideoTracks()[0];
+                if (videoTrack) {
+                    const capabilities = videoTrack.getCapabilities();
+                    const settings = videoTrack.getSettings();
+                    trackInfo = `
+                        <h4>Active Video Track:</h4>
+                        <pre>${JSON.stringify({
+                            label: videoTrack.label,
+                            id: videoTrack.id,
+                            capabilities,
+                            settings
+                        }, null, 2)}</pre>
+                    `;
+                }
+            }
+
+            infoDiv.innerHTML = `
+                <h3>Camera Information:</h3>
+                
+                <h4>Available Video Devices:</h4>
+                <pre>${JSON.stringify(videoDevices.map(device => ({
+                    deviceId: device.deviceId,
+                    label: device.label,
+                    kind: device.kind
+                })), null, 2)}</pre>
+
+                <h4>Supported Constraints:</h4>
+                <pre>${JSON.stringify(supportedConstraints, null, 2)}</pre>
+
+                <h4>Current Stream Info:</h4>
+                ${trackInfo}
+
+                <h4>User Agent:</h4>
+                <pre>${navigator.userAgent}</pre>
+            `;
+        } catch (err) {
+            infoDiv.innerHTML = `
+                <h3>Error Getting Camera Info:</h3>
+                <pre>${err.toString()}</pre>
+            `;
+        }
+    }
+
     // Start camera
     startButton.addEventListener('click', async () => {
         try {
             stream = await navigator.mediaDevices.getUserMedia({ 
-                video: { facingMode: 'environment' }
+                video: { 
+                    facingMode: 'environment',
+                    // width: { ideal: 1920 },
+                    // height: { ideal: 1080 }
+                }
             });
             video.srcObject = stream;
             video.style.display = 'block';
             captureButton.style.display = 'block';
+            
+            // Display camera info after stream is active
+            await displayCameraInfo();
         } catch (err) {
             console.error('Error accessing camera:', err);
             alert('Error accessing camera. Please make sure you have granted camera permissions.');
