@@ -119,6 +119,13 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const result = await new Promise((resolve) => {
                 Quagga.decodeSingle({
+                    debug: true,
+                    // debug: {
+                        // drawBoundingBox: true,
+                        // showFrequency: false,
+                        // drawScanline: false,
+                        // showPattern: false
+                    // },
                     decoder: {
                         readers: [
                             "ean_reader",
